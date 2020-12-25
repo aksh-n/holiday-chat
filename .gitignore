@@ -130,3 +130,4 @@ dmypy.json
 
 # Settings
 .vscode
+requirements_old.txt
