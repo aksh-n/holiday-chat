@@ -1,0 +1,47 @@
+.bg-parallax {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.bg-1 {
+    background-image: url(/img/bg-1.jpg);
+}
+
+body {
+    background-color: #A3001D;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 200;
+    font-size: 1.3rem;
+}
+
+#description {
+    margin-top: 20px;
+    color: white;
+}
+
+.container {
+    padding: 40px;
+}
+
+.btn-danger {
+    background-color: #A3001D;
+    border-color: #A3001D;
+}
+
+#navBar .container {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+#navBar .nav-item {
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 1.25rem;
+    margin-right: 1rem;
+}
+
+#navBar .nav-item .active {
+    color: #A3001D;
+}
