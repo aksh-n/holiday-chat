@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab);
 /* ==========================================================================
     Background parallax
 ========================================================================== */
@@ -10,7 +10,7 @@
 }
 
 .bg-1 {
-    background-image: url(../img/bg-1.jpg);
+    background-image: url(bg-1.jpg);
 }
 
 /* ==========================================================================
