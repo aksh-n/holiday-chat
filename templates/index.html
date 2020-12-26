@@ -1,34 +1,76 @@
-<!doctype html>
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-    </head>
-    <body>
-        <h1>Holiday Chat</h1>
-        <form>
-            <label for="username">Name: </label>
-            <input type="text" name=”username” id="username">
-            <button id="join_leave">Join call</button>
-            <!-- <button id="share_screen" disabled>Share screen</button>
-            <button id="toggle_chat" disabled>Toggle chat</button> -->
-        </form>
-        <p id="count">Disconnected.</p>
-        <div id="root">
-            <div id="container" class="container">
-                <div id="local" class="participant"><div></div><div class="label">Me</div></div>
-                <!-- more participants will be added dynamically here -->
-            </div>
-            <!-- <div id="chat">
-                <div id="chat-scroll">
-                    <div id="chat-content"> -->
-                        <!-- chat content will be added dynamically here -->
-                    <!-- </div>
-                </div>
-                <input id="chat-input" type="text">
-            </div> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Holiday Chat</title>
+  <!-- icon font awesome -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='all.css') }}" />
+  <!-- google fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Roboto+Slab:wght@100;200;300;400&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+  <script type="text/javascript"
+    src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=8ck2U0vXMbaORQYbrH3ipO8QOWiry8z7rx6BYlTLDDiRLuN8Rtzwf7cEMAgeCIztqJLJc-SujDtGUwswXizTaRJsFLgqgL2ADF4EaxcIlF0ZgJit-AMc57o0Z701Co027sxQ3v0DRwAcqXuyOVujL7jMEsIZuthzRfSmE4gS__e2yWJ8VDyZYw8oGdvPtb02pRJo1a28jsAQXOo7Dl47Wit29wfGyuPNli2wOo7sZDBmMgG7y2v4Ja4mTGseitNJQif_7u2z1C4YgGcUtlYLo5pthO2d0oQfjVYLC-YNx-jrqkO-597bLUcu71JxT28diCH351PSl0JfZrIMlds9QaTh-NfSl3s_iaea2nI-DGAtLMBm8C71QNCWPGolpAUtLhKNa2hfmZIxyw7EL0Qyl0BfMXpHbddUJxz70L58NUFSTlaky3i5W955H5NWWYG3KTKfir1nmpOOdMDR14n5xIiN4zKODSLaaxhJV9z3Y297OH5qVhsYv-NnbfUgEOdOHgf1olEq2uzZzg5pncddfHwfAnhu-jDD3aRpfgU18td3wRv8jMaItR7g8kAcYlQ8-_YWEF47aCNU-5lOFb5dkC3GNx8zYrqS3qF9cq0MUBVt48SQ_GZ8VHgbh6-Y2ibda7gkyx6lXoFZ3KzS7ZIcmouz5-JXlMBBkWQW_VNzre8XOYc-E7lNFl1QLTB6d5jr0LJEw1EKLqcQYQ78-v63E25zh3Mytqo0yYHz46YFst5Iwo3H7LapJRoggKx4aAPt3zAnM6ZTIZjtAbwSyNgY9P4Ft5iFofuNoFR3K21roaZvhzo-JzuLZ_gLtO6ZVu1T820mCK6Lub_1ERQUhKJ30qn4Eb16tpKGEQcPB7FSqM8ZO93FILbf_nmtsXooWiJygKyZQ4UjwRdvEiHZbuoYfgXgByCilEYrsur_EXTHq_GA_aaXkVbFeA2dWpQElgnDnlKPi99mJsKvtR8mJ-dFBydw3bCltMNvqOJikCu0ZMzfyeOaYe6YGc1MYrK4rz4WRNCGsJ9SFhaNFd3SXAqWTN4jcWjlvm6LHgAthYkz_e5d5St82ybmKEBo2jwJK94oqMeMoZHnhhnWCAkLm7xnw_lk04fg4eAfJ16__OMN39r3y9em9H9v3yv31usHwxlea4nKmBJZLY5WNby3MOmawaKGxR8C5Tog-DT_Amp_AgByURkS-2GCzrFH6v51Pyg0Bih8t2dbpk1hF7TbQrtD8KcVhNizn9r-4Wvs0xQHlmdzowuCNjtjP0fep95YuQXLwS4C6OK360oUQuxouRUI2_raUvjmdpYX2BCQap43CCRKFiuAj-wM7oD9MnikdnT8UGfpvuvdtiKJxP_zaEhbq3x1IJQQ5uXEyA4VQhMgNcOCXeY_livt9ICrknjcQYmJt-1GzXrh5YT0Lp-b9GFMCotIR_uG0pIvLvtaV7VxwyryFvgrqUPJRyFfX5YdZDOUWvpETTTZgkF7yf-jEiy0rwve8zDYTITa2cJT4voHB8pKt8TQbvbbtVUzmgdV3z0BJCD6CUg4Se2Bcok06dq6yzMhohOGHWqR901RKZdIQxhrrGdGecODoKE48tokYWytSXH4XSUx0n9yHzVKlcmPw126z75EHdkDHKISf49G7Itqt6oBpEOG7dpRfpb8Qw5JdBUZV7rcwAo-w62UFuweJFrFC8YKXTEDC_KlzcPIZJc0GN-PvurBNmBVqXoEUyIiuD2AwfQsCqMZqlCHViS9o_9iK8pfxRmNCuU5IW-eFU2cSHoZH2m20OerSN06o-gdgV-IdXtCotCEWmb_oE0pWtaB0S09ZwhvqVroDXDxep--TTjSzewGP8Q-q8TwKuXzQwEbZvsiDf5zHUH67BjdEqlhwMeq--4ahlogZ8vqE2QgGYe5EnS-qi4hkWe6BxRDxkiIC42YjbyrbgbYq8J7lfDEy5p4-P15drfVCRuAmk5_jZuI4kSl7RzKJVyuaDtVgOp2rruXJWn_7tUYIV3LmnHqwvvPt-gsxUY7jXB0nH4"
+    charset="UTF-8"></script>
+</head>
+
+<body>
+    <nav id="navBar" class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="chat" target="_blank">Holiday Chat</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://holidayhacks.devpost.com/" target="_blank">Holiday Hacks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://mlh.io/seasons/2021/events" target="_blank">MLH</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://devpost.com/software/holiday-chat" target="_blank">About us</a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <script src="https://media.twiliocdn.com/sdk/js/video/releases/2.3.0/twilio-video.min.js"></script>
-        <script src="https://media.twiliocdn.com/sdk/js/conversations/releases/1.0.0/twilio-conversations.min.js"></script>
-        <script src="{{ url_for('static', filename='app.js') }}"></script>
-    </body>
-</html>
+      </nav>
+  <header id="header" class="bg-parallax bg-1 text-center">
+    <!-- <div>
+      <img class="img-fluid" src="{{ url_for('static', filename='bg-1.png') }}" alt="">
+    </div> -->
+    <div class="container">
+      <div>
+        <img class="img-fluid" src="{{ url_for('static', filename='logo.png') }}" alt="">
+      </div>
+      <div>
+        <p>...</p>
+      </div>
+      <div>
+        <a href="video" class="btn btn-danger btn-lg">Connect</a>
+      </div>
+    </div>
+  </header>
+  <div class="container text-center">
+      <p id="description">The holiday season, as festive and jolly as it might seem, can also be a stressful time. Add in a global pandemic that has required separation from family and friends as well as altering or canceling annual traditions, and not only might this holiday season feel stressful, but it might also feel lonely and depressing. Connect and get started with our Christmas-Themed Holiday Chat and Video Conferencing Platform to spend time and to form meaningful connections with strangers on holidays.</p>
+  </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
+  </body>
+  </html>
