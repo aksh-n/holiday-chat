@@ -15,7 +15,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('main.html')
+
+@app.route('/video')
+def video():
+    return render_template('video.html')
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -29,4 +33,7 @@ def login():
 
     return {'token': token.to_jwt()}
 
+@app.route('/chat')
+def chat():
+    return render_template('chat.html')
 # Run Flask server, then open localhost:5000. ngrok is a good utility to try out one-one video conferencing. for eg: FLASK_ENV=development flask run
