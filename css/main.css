@@ -59,3 +59,7 @@ body {
 #navBar .nav-item .active {
     color: #A3001D;
 }
+
+.label, p, label {
+    color: white;
+}
