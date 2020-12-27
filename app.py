@@ -36,4 +36,5 @@ def login():
 @app.route('/chat')
 def chat():
     return render_template('chat.html')
+
 # Run Flask server, then open localhost:5000. ngrok is a good utility to try out one-one video conferencing. for eg: FLASK_ENV=development flask run
